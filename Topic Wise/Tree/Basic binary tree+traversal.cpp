@@ -16,6 +16,27 @@ tree* newNode(int key)
 	return node;
 }
 
+void levelorder(tree* root)
+{
+	if (root == NULL)
+		return;
+
+	queue<tree*> q;
+	q.push(root);
+
+	while (!q.empty())
+	{
+		tree* p = q.front();
+		cout << p->data << " ";
+		q.pop();
+
+		if (p->left != NULL)
+			q.push(p->left);
+		if (p->right != NULL)
+			q.push(p->right);
+	}
+}
+
 void inorder(tree* root)
 {
 	if (root == NULL)
@@ -52,8 +73,9 @@ int main()
 	root->right = newNode(3);
 	root->left->left = newNode(4);
 	root->left->right = newNode(5);
-	//root->right->left = newNode(6);
-	//root->right->right = newNode(7);
+	root->right->left = newNode(6);
+	root->right->right = newNode(7);
+
 	cout << "Inorder: ";
 	inorder(root);
 	cout << endl;
@@ -62,5 +84,8 @@ int main()
 	cout << endl;
 	cout << "Postorder: ";
 	postorder(root);
+	cout << endl;
+	cout << "Level Order: ";
+	levelorder(root);
 	cout << endl;
 }
